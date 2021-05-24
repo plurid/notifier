@@ -9,31 +9,9 @@
 
 
 // #region module
-const PUBLISH = gql`
-    mutation MessagerMutationPublish($input: MessagerInputPublish!) {
-        messagerMutationPublish(input: $input) {
-            status
-        }
-    }
-`;
-
-
-const SUBSCRIBE = gql`
-    subscription MessagerSubscriptionSubscribe($input: MessagerInputSubscribe!) {
-        messagerMutationSubscribe(input: $input) {
-            status
-            data {
-                sender
-                message
-            }
-        }
-    }
-`;
-
-
-const SEND = gql`
-    mutation MessagerMutationSend($input: MessagerInputSend!) {
-        messagerMutationSend(input: $input) {
+const NOTIFY = gql`
+    mutation NotifierMutationNotify($input: NotifierInputNotify!) {
+        notifierMutationNotify(input: $input) {
             status
         }
     }
@@ -45,8 +23,6 @@ const SEND = gql`
 
 // #region exports
 export {
-    PUBLISH,
-    SUBSCRIBE,
-    SEND,
+    NOTIFY,
 };
 // #endregion exports

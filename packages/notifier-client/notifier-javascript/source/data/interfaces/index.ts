@@ -1,5 +1,5 @@
 // #region module
-export interface MessagerConfiguration {
+export interface NotifierConfiguration {
     endpoint?: string;
     token?: string;
     logger?: (
@@ -9,18 +9,57 @@ export interface MessagerConfiguration {
 }
 
 
-export interface MessagerMetadata {
-    sender: string;
+export type NotifyData =
+    | NotifyMail
+    | NotifySMS
+    | NotifySocial;
+
+
+export interface NotifySMS {
+    kind: 'sms';
+    to: string | string[];
+    message: string;
 }
 
 
-export interface MesagerContextCall {
+export interface NotifySocial {
+    kind: 'social';
+    provider: NotifySocialProvider;
+    to: string | string[];
+    message: string;
+    attachments?: NotifyAttachment[];
+}
+
+export type NotifySocialProvider =
+    | 'twitter'
+    | 'facebook'
+    | 'deself';
+
+
+export interface NotifyMail {
+    kind: 'mail';
+    to: string | string[];
+    subject: string;
+    text: string;
+    html?: string;
+    attachments?: NotifyAttachment[];
+}
+
+
+export interface NotifyAttachment {
+    filename: string;
+    value: string | ReadableStream;
+}
+
+
+
+export interface NotifierContextCall {
     depth?: number;
-    repository?: MesagerContextCallRepository;
+    repository?: NotifierContextCallRepository;
 }
 
 
-export interface MesagerContextCallRepository {
+export interface NotifierContextCallRepository {
     provider?: string;
     name?: string;
     branch?: string;
@@ -29,7 +68,7 @@ export interface MesagerContextCallRepository {
 }
 
 
-export interface MesagerInputRecord {
+export interface NotifierInputRecord {
     text: string;
     time: number;
     level: number;
@@ -42,16 +81,16 @@ export interface MesagerInputRecord {
     method?: string;
     error?: string;
     extradata?: string;
-    context?: MesagerInputRecordContextCall;
+    context?: NotifierInputRecordContextCall;
 }
 
 
-export interface MesagerInputRecordContextCall {
-    repository: MesagerInputRecordContextRepository;
-    caller: MesagerInputRecordContextCaller;
+export interface NotifierInputRecordContextCall {
+    repository: NotifierInputRecordContextRepository;
+    caller: NotifierInputRecordContextCaller;
 }
 
-export interface MesagerInputRecordContextRepository {
+export interface NotifierInputRecordContextRepository {
     provider: string;
     name: string;
     branch: string;
@@ -59,7 +98,7 @@ export interface MesagerInputRecordContextRepository {
     basePath: string;
 }
 
-export interface MesagerInputRecordContextCaller {
+export interface NotifierInputRecordContextCaller {
     file: string;
     line: number;
     column: number;

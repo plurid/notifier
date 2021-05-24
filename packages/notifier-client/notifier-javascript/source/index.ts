@@ -1,7 +1,7 @@
 // #region imports
     // #region internal
     import {
-        messager,
+        notifier,
     } from './functions';
     // #endregion internal
 // #endregion imports
@@ -12,5 +12,5 @@
 export * from './data/interfaces';
 export * from './data/constants';
 
-export default messager;
+export default notifier;
 // #endregion exports

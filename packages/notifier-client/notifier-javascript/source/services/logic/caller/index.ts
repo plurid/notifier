@@ -1,10 +1,10 @@
 // #region imports
     // #region external
     import {
-        MesagerContextCall,
-        MesagerInputRecordContextCall,
-        MesagerInputRecordContextRepository,
-        MesagerInputRecordContextCaller,
+        NotifierContextCall,
+        NotifierInputRecordContextCall,
+        NotifierInputRecordContextRepository,
+        NotifierInputRecordContextCaller,
     } from '../../../data/interfaces';
 
     import {
@@ -35,7 +35,7 @@ const callsites = () => {
 
 
 const getCallContext = (
-    call?: MesagerContextCall,
+    call?: NotifierContextCall,
 ) => {
     if (!call && !CALL_CONTEXT) {
         return;
@@ -47,7 +47,7 @@ const getCallContext = (
         const callDepth = call?.depth || DEFAULT_CALL_DEPTH;
         const calls = callsites();
 
-        const caller: MesagerInputRecordContextCaller = {
+        const caller: NotifierInputRecordContextCaller = {
             file: calls[callDepth].getFileName() || '',
             line: calls[callDepth].getLineNumber() || -1,
             column: calls[callDepth].getColumnNumber() || -1,
@@ -71,7 +71,7 @@ const getCallContext = (
 
         const filepath = file.replace(repositoryBasePath, '');
 
-        const repository: MesagerInputRecordContextRepository = {
+        const repository: NotifierInputRecordContextRepository = {
             provider,
             name: repositoryName,
             branch: repositoryBranch,
@@ -79,7 +79,7 @@ const getCallContext = (
             basePath: repositoryBasePath,
         };
 
-        const callContext: MesagerInputRecordContextCall = {
+        const callContext: NotifierInputRecordContextCall = {
             repository,
             caller: {
                 file: filepath,

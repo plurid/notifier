@@ -1,6 +1,6 @@
 // #region imports
     // #region internal
-    import messager from './messager';
+    import notifier from './notifier';
     // #endregion internal
 // #endregion imports
 
@@ -8,6 +8,6 @@
 
 // #region exports
 export {
-    messager,
+    notifier,
 };
 // #endregion exports
